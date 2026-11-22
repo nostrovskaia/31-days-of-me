@@ -1,6 +1,6 @@
 const ADVENT_DATA = {
   settings: {
-    unlockAllByDefault: false,
+    unlockAllByDefault: true,
     targetMonth: 12,
     badge: "ADVENT PORTFOLIO // 2026"
   },
