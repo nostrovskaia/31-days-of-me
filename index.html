@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advent Portfolio — Blue & Emerald Edition</title>
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjIyIiBmaWxsPSIjMWUyOTNiIi8+PHRleHQgeD0iNTAiIHk9IjY2IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZvbnQtc2l6ZT0iNDYiIGZpbGw9IiNmZmZmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk5PPC90ZXh0Pjwvc3ZnPg==">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0E171D;
+      --bg-card: #15232C;
+      --surface: #1B2C37;
+      --text: #EBF4F6;
+      --text-muted: #98B2BD;
+      --border: #2C4654;
+      --accent-teal: #2EC4B6;
+      --accent-blue: #4EA8DE;
+      --accent-emerald: #1B7A6E;
+      --accent-cream: #DCE8E5;
+      --accent-gold: #D4B475;
+      --mono: 'Space Mono', monospace;
+      --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      padding: 32px 20px 64px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .ambient-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      top: -20px;
+      background: var(--accent-teal);
+      clip-path: polygon(50% 0%, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0% 50%, 38% 38%);
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-20px) rotate(0deg); }
+      100% { transform: translateY(105vh) rotate(180deg); }
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      border-top: 2px solid var(--accent-teal);
+      border-bottom: 2px solid var(--border);
+      padding: 28px 0;
+      margin-bottom: 32px;
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .badge {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-teal);
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+
+    h1 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .role {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--accent-blue);
+      margin-bottom: 14px;
+    }
+
+    .bio {
+      font-size: 15px;
+      max-width: 620px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .meta-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .contacts-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .contact-link {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 2px solid var(--accent-teal);
+      padding-bottom: 2px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .contact-link:hover {
+      background: var(--accent-teal);
+      color: var(--bg);
+    }
+
+    .header-skills {
+      border-left: 1px solid var(--border);
+      padding-left: 20px;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .skill-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 3px 7px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--accent-cream);
+      text-transform: uppercase;
+    }
+
+    .grid-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .advent-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      border-top: 2px solid var(--border);
+      border-left: 2px solid var(--border);
+      background: var(--border);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    .tile {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      background: var(--bg-card);
+      border-right: 2px solid var(--border);
+      border-bottom: 2px solid var(--border);
+      cursor: pointer;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .tile[data-day="31"] {
+      grid-column: span 2;
+      aspect-ratio: 2 / 1;
+    }
+
+    .tile-cover {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 12px;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 2;
+      will-change: opacity, transform;
+    }
+
+    .tile-svg-wrap {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .tile-svg-wrap svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .tile-number {
+      position: relative;
+      z-index: 1;
+      font-family: var(--mono);
+      font-size: 16px;
+      font-weight: 700;
+      background: rgba(14, 23, 29, 0.88);
+      color: var(--text);
+      border: 1.5px solid var(--accent-teal);
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(2px);
+    }
+
+    .tile.locked {
+      cursor: not-allowed;
+    }
+
+    .tile.locked:hover .tile-number {
+      border-color: var(--text-muted);
+      color: var(--text-muted);
+    }
+
+    .tile:not(.locked):hover .tile-number {
+      background: var(--accent-teal);
+      color: var(--bg);
+    }
+
+    .tile-opened-preview {
+      position: absolute;
+      inset: 0;
+      background: var(--surface);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 1;
+    }
+
+    .tile.is-open .tile-cover {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.95);
+    }
+
+    .preview-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent-teal);
+      font-weight: 700;
+    }
+
+    .preview-tag {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .preview-title {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--text);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .preview-more {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent-blue);
+      text-decoration: underline;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 13, 17, 0.82);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+      backdrop-filter: blur(3px);
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--bg-card);
+      border: 2px solid var(--accent-teal);
+      max-width: 540px;
+      width: 100%;
+      padding: 32px;
+      position: relative;
+      box-shadow: 10px 10px 0 var(--accent-emerald);
+      animation: popIn 0.2s ease-out;
+    }
+
+    @keyframes popIn {
+      from { transform: translateY(10px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1.5px solid var(--border);
+      padding-bottom: 14px;
+      margin-bottom: 20px;
+    }
+
+    .modal-meta {
+      font-family: var(--mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--accent-teal);
+    }
+
+    .modal-close {
+      background: none;
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 14px;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .modal-close:hover {
+      background: var(--accent-teal);
+      border-color: var(--accent-teal);
+      color: var(--bg);
+    }
+
+    .modal-title {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .modal-text {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--accent-cream);
+      margin-bottom: 24px;
+      white-space: pre-line;
+    }
+
+    .modal-link {
+      display: inline-block;
+      background: var(--accent-teal);
+      color: var(--bg);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 12px 20px;
+      text-decoration: none;
+      border: 1.5px solid var(--accent-teal);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .modal-link:hover {
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+      color: var(--bg);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--surface);
+      color: var(--text);
+      border: 1.5px solid var(--accent-teal);
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 10px 18px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 200;
+      max-width: 90vw;
+      text-align: center;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1.5px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .footer-controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .stealth-toggle {
+      background: transparent;
+      border: 1px dashed var(--border);
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 5px 10px;
+      cursor: pointer;
+      opacity: 0.75;
+      transition: opacity 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .stealth-toggle:hover {
+      opacity: 1;
+      border-color: var(--accent-teal);
+      color: var(--text);
+    }
+
+    @media (max-width: 900px) {
+      header {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .header-skills {
+        border-left: none;
+        border-top: 1px solid var(--border);
+        padding-left: 0;
+        padding-top: 16px;
+      }
+      .advent-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .advent-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .modal-card {
+        padding: 24px 20px;
+      }
+    }
+  </style>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    window.YM_ID = 114490668; // номер счётчика
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=window.YM_ID', 'ym');
+
+    ym(window.YM_ID, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+  </script>
+</head>
+<body>
+
+<div class="ambient-layer" id="ambient-layer" aria-hidden="true"></div>
+
+<div class="container">
+  <header>
+    <div class="header-main">
+      <span class="badge" id="ui-badge"></span>
+      <h1 id="ui-name"></h1>
+      <div class="role" id="ui-role"></div>
+      <p class="bio" id="ui-bio"></p>
+      <div class="contacts-block">
+        <div class="meta-label">Связаться и материалы</div>
+        <div class="contacts-list" id="ui-contacts"></div>
+      </div>
+    </div>
+    <div class="header-skills">
+      <div class="meta-label">Ключевые компетенции</div>
+      <div class="skills-list" id="ui-skills"></div>
+    </div>
+  </header>
+
+  <div class="grid-toolbar">
+    <span id="ui-progress"></span>
+    <span id="ui-hint"></span>
+  </div>
+
+  <main class="advent-grid" id="advent-grid"></main>
+
+  <footer>
+    <div id="ui-footer-note"></div>
+    <div class="footer-controls">
+      <button type="button" class="stealth-toggle" id="reset-progress-btn" title="Закрыть все карточки">Сбросить прогресс</button>
+      <button type="button" class="stealth-toggle" id="mode-toggle-btn" title="Переключить доступ к датам"></button>
+    </div>
+  </footer>
+</div>
+
+<div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-card">
+    <div class="modal-header">
+      <span class="modal-meta" id="modal-meta"></span>
+      <button type="button" class="modal-close" id="modal-close" aria-label="Закрыть">✕</button>
+    </div>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <p class="modal-text" id="modal-text"></p>
+    <a class="modal-link" id="modal-link" href="#" target="_blank" rel="noopener noreferrer"></a>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="content.js"></script>
+<script>
+  (function() {
+    if (typeof ADVENT_DATA === 'undefined' || !ADVENT_DATA.days) {
+      document.body.innerHTML = '<div style="padding:40px;font-family:monospace;color:#EBF4F6;">Ошибка загрузки: убедитесь, что файл <b>content.js</b> лежит в той же папке, что и <b>index-teal.html</b>.</div>';
+      return;
+    }
+
+    const settings = ADVENT_DATA.settings || {};
+    const profile = ADVENT_DATA.profile || {};
+    const days = Array.isArray(ADVENT_DATA.days) ? ADVENT_DATA.days : [];
+
+    const STORAGE_OPENED_KEY = 'advent_portfolio_opened_teal_v1';
+    const STORAGE_MODE_KEY = 'advent_portfolio_unlock_all_teal_v1';
+
+    const storage = {
+      get(key) { try { return localStorage.getItem(key); } catch (e) { return null; } },
+      set(key, val) { try { localStorage.setItem(key, val); } catch (e) {} },
+      remove(key) { try { localStorage.removeItem(key); } catch (e) {} }
+    };
+
+    function sanitizeUrl(rawUrl) {
+      if (!rawUrl || typeof rawUrl !== 'string') return '';
+      const trimmed = rawUrl.trim();
+      return /^(https?:\/\/|mailto:|tel:|\/|\.\/)/i.test(trimmed) ? trimmed : '';
+    }
+
+    // Деликатные мерцающие частицы на фоне
+    const ambient = document.getElementById('ambient-layer');
+    for (let i = 0; i < 20; i++) {
+      const p = document.createElement('span');
+      p.className = 'particle';
+      p.style.left = `${(i * 5.2) % 100}%`;
+      p.style.animationDuration = `${11 + (i % 6) * 2.5}s`;
+      p.style.animationDelay = `${-(i * 1.4)}s`;
+      p.style.opacity = `${0.14 + (i % 4) * 0.06}`;
+      p.style.background = i % 2 === 0 ? '#2EC4B6' : '#4EA8DE';
+      const size = 5 + (i % 3) * 2;
+      p.style.width = `${size}px`;
+      p.style.height = `${size}px`;
+      ambient.appendChild(p);
+    }
+
+    // Богатая сине-зеленая палитра с кофейно-кремовыми и золотистыми акцентами для мелкой геометрии
+    const PALETTE = [
+      '#0E171D', // глубокий ночной петроль
+      '#15232C', // темный морской сланец
+      '#1B7A6E', // насыщенный изумруд
+      '#2EC4B6', // яркая бирюза
+      '#1D4E89', // глубокий кобальт
+      '#4EA8DE', // ледяной голубой
+      '#133C38', // темно-хвойный
+      '#D4B475', // теплое матовое золото
+      '#DCE8E5'  // светлый мятно-кремовый
+    ];
+
+    function getDetailedTealPatternSVG(day) {
+      if (day === 31) {
+        return `<svg viewBox="0 0 200 100" preserveAspectRatio="none" aria-hidden="true">
+          <rect width="200" height="100" fill="#0E171D"/>
+          <g stroke="#2EC4B6" stroke-width="1" fill="none" opacity="0.45">
+            <circle cx="50" cy="50" r="42"/><circle cx="50" cy="50" r="30"/><circle cx="50" cy="50" r="18"/>
+            <circle cx="150" cy="50" r="42"/><circle cx="150" cy="50" r="30"/><circle cx="150" cy="50" r="18"/>
+          </g>
+          <polygon points="50,12 88,50 50,88 12,50" fill="#1B7A6E"/>
+          <polygon points="50,26 74,50 50,74 26,50" fill="#D4B475"/>
+          <polygon points="150,12 162,38 188,50 162,62 150,88 138,62 112,50 138,38" fill="#4EA8DE"/>
+          <circle cx="150" cy="50" r="8" fill="#DCE8E5"/>
+          <line x1="100" y1="0" x2="100" y2="100" stroke="#2EC4B6" stroke-width="1.5"/>
+        </svg>`;
+      }
+
+      const c1 = PALETTE[(day * 3) % PALETTE.length];
+      const c2 = PALETTE[(day * 5 + 2) % PALETTE.length];
+      const c3 = PALETTE[(day * 7 + 4) % PALETTE.length];
+      const c4 = PALETTE[(day * 11 + 1) % PALETTE.length];
+      const rot = (day % 4) * 90;
+
+      const generators = [
+        // 0: Сетка 3x3 из чередующихся микро-треугольников и точек
+        () => {
+          let inner = `<rect width="100" height="100" fill="${c1}"/>`;
+          const step = 33.33;
+          for (let r = 0; r < 3; r++) {
+            for (let col = 0; col < 3; col++) {
+              const x = col * step;
+              const y = r * step;
+              const fill = (r + col) % 2 === 0 ? c2 : c3;
+              inner += `<polygon points="${x},${y} ${x + step},${y} ${x},${y + step}" fill="${fill}"/>`;
+              inner += `<circle cx="${x + step * 0.68}" cy="${y + step * 0.68}" r="3.2" fill="${c4}"/>`;
+            }
+          }
+          return inner;
+        },
+        // 1: Концентрические мишени и диагональный крест
+        () => `
+          <rect width="100" height="100" fill="${c1}"/>
+          <circle cx="50" cy="50" r="44" fill="${c2}"/>
+          <circle cx="50" cy="50" r="32" fill="${c1}"/>
+          <circle cx="50" cy="50" r="20" fill="${c3}"/>
+          <circle cx="50" cy="50" r="9" fill="${c4}"/>
+          <line x1="0" y1="0" x2="100" y2="100" stroke="${c4}" stroke-width="1.5"/>
+          <line x1="100" y1="0" x2="0" y2="100" stroke="${c4}" stroke-width="1.5"/>
+        `,
+        // 2: Сетка 4x4 из четвертей круга (чешуя / волны)
+        () => {
+          let inner = `<rect width="100" height="100" fill="${c1}"/>`;
+          for (let r = 0; r < 4; r++) {
+            for (let col = 0; col < 4; col++) {
+              const x = col * 25;
+              const y = r * 25;
+              const fill = (r + col) % 2 === 0 ? c2 : c3;
+              inner += `<path d="M${x},${y} L${x + 25},${y} A25,25 0 0,1 ${x},${y + 25} Z" fill="${fill}"/>`;
+              inner += `<circle cx="${x + 7}" cy="${y + 7}" r="2.2" fill="${c4}"/>`;
+            }
+          }
+          return inner;
+        },
+        // 3: Мелкий шеврон / елочка из 5 полос
+        () => {
+          let inner = `<rect width="100" height="100" fill="${c1}"/>`;
+          for (let i = -1; i < 5; i++) {
+            const y = i * 22;
+            const col = i % 2 === 0 ? c2 : c3;
+            inner += `<polyline points="0,${y + 18} 50,${y} 100,${y + 18}" fill="none" stroke="${col}" stroke-width="8"/>`;
+          }
+          inner += `<circle cx="50" cy="50" r="7" fill="${c4}"/>`;
+          return inner;
+        },
+        // 4: 8-секторный калейдоскоп
+        () => `
+          <rect width="100" height="100" fill="${c1}"/>
+          <polygon points="50,50 0,0 50,0" fill="${c2}"/>
+          <polygon points="50,50 100,0 100,50" fill="${c2}"/>
+          <polygon points="50,50 100,100 50,100" fill="${c2}"/>
+          <polygon points="50,50 0,100 0,50" fill="${c2}"/>
+          <polygon points="50,14 86,50 50,86 14,50" fill="${c3}"/>
+          <circle cx="50" cy="50" r="14" fill="${c1}"/>
+          <circle cx="50" cy="50" r="6" fill="${c4}"/>
+        `,
+        // 5: Шахматка 4x4 с вписанными ромбами и кругами
+        () => {
+          let inner = `<rect width="100" height="100" fill="${c1}"/>`;
+          for (let r = 0; r < 4; r++) {
+            for (let col = 0; col < 4; col++) {
+              const x = col * 25;
+              const y = r * 25;
+              if ((r + col) % 2 === 0) {
+                inner += `<rect x="${x}" y="${y}" width="25" height="25" fill="${c2}"/>`;
+                inner += `<polygon points="${x + 12.5},${y + 3} ${x + 22},${y + 12.5} ${x + 12.5},${y + 22} ${x + 3},${y + 12.5}" fill="${c4}"/>`;
+              } else {
+                inner += `<circle cx="${x + 12.5}" cy="${y + 12.5}" r="6" fill="${c3}"/>`;
+              }
+            }
+          }
+          return inner;
+        },
+        // 6: Двойные концентрические арки по углам
+        () => `
+          <rect width="100" height="100" fill="${c1}"/>
+          <circle cx="0" cy="0" r="46" fill="${c2}"/>
+          <circle cx="0" cy="0" r="28" fill="${c3}"/>
+          <circle cx="100" cy="100" r="46" fill="${c2}"/>
+          <circle cx="100" cy="100" r="28" fill="${c3}"/>
+          <polygon points="50,24 76,50 50,76 24,50" fill="${c4}"/>
+          <circle cx="50" cy="50" r="7" fill="${c1}"/>
+        `,
+        // 7: Вертикальные полосы с ритмом мелких кругов
+        () => {
+          let inner = `<rect width="100" height="100" fill="${c1}"/>`;
+          for (let i = 0; i < 5; i++) {
+            const x = i * 20;
+            if (i % 2 === 1) inner += `<rect x="${x}" y="0" width="20" height="100" fill="${c2}"/>`;
+            for (let j = 0; j < 5; j++) {
+              const cy = j * 20 + 10;
+              inner += `<circle cx="${x + 10}" cy="${cy}" r="4.2" fill="${(i + j) % 2 === 0 ? c3 : c4}"/>`;
+            }
+          }
+          return inner;
+        },
+        // 8: Тонкая сетка 5x5 с акцентами на диагоналях
+        () => {
+          let inner = `<rect width="100" height="100" fill="${c1}"/>`;
+          for (let r = 0; r < 5; r++) {
+            for (let col = 0; col < 5; col++) {
+              const x = col * 20;
+              const y = r * 20;
+              inner += `<rect x="${x + 1}" y="${y + 1}" width="18" height="18" fill="none" stroke="${c2}" stroke-width="1"/>`;
+              if (r === col || r + col === 4) {
+                inner += `<rect x="${x + 4}" y="${y + 4}" width="12" height="12" fill="${c3}"/>`;
+                inner += `<circle cx="${x + 10}" cy="${y + 10}" r="2.5" fill="${c4}"/>`;
+              }
+            }
+          }
+          return inner;
+        },
+        // 9: Четырехлепестковый геометрический цветок с двойным контуром
+        () => `
+          <rect width="100" height="100" fill="${c1}"/>
+          <circle cx="50" cy="24" r="20" fill="${c2}"/>
+          <circle cx="50" cy="76" r="20" fill="${c2}"/>
+          <circle cx="24" cy="50" r="20" fill="${c3}"/>
+          <circle cx="76" cy="50" r="20" fill="${c3}"/>
+          <polygon points="50,32 68,50 50,68 32,50" fill="${c4}"/>
+          <circle cx="50" cy="50" r="6" fill="${c1}"/>
+        `
+      ];
+
+      const chosen = generators[day % generators.length]();
+      return `<svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <g transform="rotate(${rot} 50 50)">${chosen}</g>
+      </svg>`;
+    }
+
+    const savedMode = storage.get(STORAGE_MODE_KEY);
+    let isUnlockAllMode = savedMode !== null ? savedMode === 'true' : Boolean(settings.unlockAllByDefault);
+
+    let openedDays = [];
+    try {
+      const parsed = JSON.parse(storage.get(STORAGE_OPENED_KEY) || '[]');
+      if (Array.isArray(parsed)) openedDays = parsed;
+    } catch (e) {
+      openedDays = [];
+    }
+
+    const safeName = profile.name || 'Портфолио';
+    document.title = `${safeName} — Advent Portfolio`;
+    document.getElementById('ui-badge').textContent = settings.badge || '';
+    document.getElementById('ui-name').textContent = safeName;
+    document.getElementById('ui-role').textContent = profile.role || '';
+    document.getElementById('ui-bio').textContent = profile.bio || '';
+    document.getElementById('ui-footer-note').textContent = [safeName, profile.footerNote].filter(Boolean).join(' · ');
+
+    const skillsContainer = document.getElementById('ui-skills');
+    (profile.skills || []).forEach(skill => {
+      const span = document.createElement('span');
+      span.className = 'skill-tag';
+      span.textContent = skill;
+      skillsContainer.appendChild(span);
+    });
+
+    const contactsContainer = document.getElementById('ui-contacts');
+    (profile.contacts || []).forEach(contact => {
+      const safeHref = sanitizeUrl(contact.url);
+      if (!safeHref) return;
+      const a = document.createElement('a');
+      a.className = 'contact-link';
+      a.href = safeHref;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.textContent = contact.label || safeHref;
+      contactsContainer.appendChild(a);
+    });
+
+    const targetMonth = Number(settings.targetMonth) || 12;
+
+    function isDayUnlockedByDate(dayNumber) {
+      if (isUnlockAllMode) return true;
+      const now = new Date();
+      return (now.getMonth() + 1) === targetMonth && dayNumber <= now.getDate();
+    }
+
+    let toastTimer = null;
+    const toastEl = document.getElementById('toast');
+    function showToast(message) {
+      toastEl.textContent = message;
+      toastEl.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2600);
+    }
+
+    function updateToolbar() {
+      document.getElementById('ui-progress').textContent = `Открыто: ${openedDays.length} / ${days.length}`;
+      document.getElementById('mode-toggle-btn').textContent = isUnlockAllMode
+        ? 'Режим: Открыты все [Рекрутер]'
+        : 'Режим: По датам [Календарь]';
+      document.getElementById('ui-hint').textContent = isUnlockAllMode
+        ? `Доступны все ${days.length} ячеек без ожидания дат`
+        : 'Ячейки открываются согласно датам календаря';
+    }
+
+    const grid = document.getElementById('advent-grid');
+    const tileElements = [];
+
+    function buildGrid() {
+      const fragment = document.createDocumentFragment();
+
+      days.forEach(item => {
+        const dayNum = Number(item.day);
+        const dayLabel = String(dayNum).padStart(2, '0');
+
+        const tile = document.createElement('div');
+        tile.className = 'tile';
+        tile.dataset.day = dayNum;
+        tile.setAttribute('role', 'button');
+        tile.setAttribute('tabindex', '0');
+
+        const cover = document.createElement('div');
+        cover.className = 'tile-cover';
+
+        const svgWrap = document.createElement('div');
+        svgWrap.className = 'tile-svg-wrap';
+        svgWrap.innerHTML = getDetailedTealPatternSVG(dayNum);
+        cover.appendChild(svgWrap);
+
+        const numSpan = document.createElement('span');
+        numSpan.className = 'tile-number';
+        numSpan.textContent = dayLabel;
+        cover.appendChild(numSpan);
+
+        const preview = document.createElement('div');
+        preview.className = 'tile-opened-preview';
+
+        const previewTop = document.createElement('div');
+        previewTop.className = 'preview-top';
+
+        const topNum = document.createElement('span');
+        topNum.textContent = `#${dayLabel}`;
+
+        const topTag = document.createElement('span');
+        topTag.className = 'preview-tag';
+        topTag.textContent = item.tag || '';
+
+        previewTop.appendChild(topNum);
+        previewTop.appendChild(topTag);
+
+        const previewTitle = document.createElement('div');
+        previewTitle.className = 'preview-title';
+        previewTitle.textContent = item.title || '';
+
+        const previewMore = document.createElement('div');
+        previewMore.className = 'preview-more';
+        previewMore.textContent = 'Читать →';
+
+        preview.appendChild(previewTop);
+        preview.appendChild(previewTitle);
+        preview.appendChild(previewMore);
+
+        tile.appendChild(cover);
+        tile.appendChild(preview);
+
+        const handleActivate = () => {
+          if (!isDayUnlockedByDate(dayNum)) {
+            showToast(`Ячейка #${dayNum} откроется ${dayLabel}.${String(targetMonth).padStart(2, '0')}. Внизу страницы можно включить режим просмотра всех дат.`);
+            return;
+          }
+ 		if (typeof ym === 'function') {
+  		ym(window.YM_ID, 'reachGoal', 'open_day', { day: dayNum });
+ 		}
+
+          if (!openedDays.includes(dayNum)) {
+            openedDays.push(dayNum);
+            storage.set(STORAGE_OPENED_KEY, JSON.stringify(openedDays));
+            tile.classList.add('is-open');
+            updateToolbar();
+          }
+
+          openModal(item);
+        };
+
+        tile.addEventListener('click', handleActivate);
+        tile.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleActivate();
+          }
+        });
+
+        tileElements.push({ tile, dayNum });
+        fragment.appendChild(tile);
+      });
+
+      grid.appendChild(fragment);
+      syncTileStates();
+    }
+
+    function syncTileStates() {
+      tileElements.forEach(({ tile, dayNum }) => {
+        const unlocked = isDayUnlockedByDate(dayNum);
+        const isOpened = openedDays.includes(dayNum);
+        tile.classList.toggle('locked', !unlocked);
+        tile.classList.toggle('is-open', isOpened);
+      });
+      updateToolbar();
+    }
+
+    const modalBackdrop = document.getElementById('modal-backdrop');
+    const modalClose = document.getElementById('modal-close');
+
+    function openModal(item) {
+      const dayLabel = String(item.day).padStart(2, '0');
+      const metaParts = [`День ${dayLabel}`];
+      if (item.tag) metaParts.push(item.tag);
+
+      document.getElementById('modal-meta').textContent = metaParts.join(' // ');
+      document.getElementById('modal-title').textContent = item.title || '';
+      document.getElementById('modal-text').textContent = item.text || '';
+
+      const linkEl = document.getElementById('modal-link');
+      const safeLink = sanitizeUrl(item.linkUrl);
+      if (item.linkText && safeLink) {
+        linkEl.textContent = item.linkText;
+        linkEl.href = safeLink;
+        linkEl.style.display = 'inline-block';
+      } else {
+        linkEl.style.display = 'none';
+      }
+
+      modalBackdrop.classList.add('active');
+      modalClose.focus();
+    }
+
+    function closeModal() {
+      modalBackdrop.classList.remove('active');
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', (e) => {
+      if (e.target === modalBackdrop) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalBackdrop.classList.contains('active')) {
+        closeModal();
+      }
+    });
+
+    document.getElementById('mode-toggle-btn').addEventListener('click', () => {
+      isUnlockAllMode = !isUnlockAllMode;
+      storage.set(STORAGE_MODE_KEY, String(isUnlockAllMode));
+      syncTileStates();
+      showToast(isUnlockAllMode
+        ? 'Включен режим свободного просмотра (все ячейки открыты)'
+        : 'Включен режим календаря (открытие по датам)');
+    });
+
+    document.getElementById('reset-progress-btn').addEventListener('click', () => {
+      openedDays = [];
+      storage.remove(STORAGE_OPENED_KEY);
+      syncTileStates();
+      showToast('Орнамент восстановлен: все карточки снова закрыты');
+    });
+
+    buildGrid();
+  })();
+</script>
+
+</body>
+</html>
